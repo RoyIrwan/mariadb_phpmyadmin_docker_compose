@@ -9,6 +9,6 @@ Semua menggunakan *Docker Official Image*.
 Kenapa phpmyadmin dan nginx menggunakan versi alpine? Karena distro alpine sangan ringan dan *size* yang sangat kecil.
 
 ## Cara menjalankan
- 1. Clone
- 2. Docker compose
+Jalankan perintah docker compose seperti berikut:
+
     docker compose up -d
