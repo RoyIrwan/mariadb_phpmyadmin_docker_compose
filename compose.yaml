@@ -1,0 +1,43 @@
+services:
+  mariadb:
+    image: mariadb:10
+    ports:
+      - 3306:3306
+    networks:
+      default: {}
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_HOST: '%'
+      # MYSQL_DATABASE: '${DB_DATABASE}'
+      # MYSQL_USER: '${DB_USERNAME}'
+      # MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - 'mariadb-data:/var/lib/mysql'
+    healthcheck:
+      test: 
+        - CMD
+        - mysqladmin
+        - ping
+        - '-ppassword'
+      timeout: 5s
+      retries: 3
+  phpmyadmin:
+    image: 'phpmyadmin:latest'
+    ports:
+      - 8080:80
+    networks:
+      default: {}
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=150M
+    volumes:
+      - ./info.php:/var/www/html/info.php
+networks:
+  default:
+    name: database
+    attachable: true
+    external: true
+volumes:
+  mariadb-data: 
+    driver: local
