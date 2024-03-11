@@ -13,6 +13,7 @@ services:
       # MYSQL_USER: '${DB_USERNAME}'
       # MYSQL_PASSWORD: '${DB_PASSWORD}'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      TZ: 'Asia/Jakarta'
     volumes:
       - 'mariadb-data:/var/lib/mysql'
   phpmyadmin:
@@ -40,7 +41,7 @@ services:
       - phpmyadmin_data:/var/www/html:ro
       # - ./info.php:/var/www/html/info.php
     ports:
-      - 8080:80
+      - 8000:80
     depends_on:
       - mariadb
       - phpmyadmin
